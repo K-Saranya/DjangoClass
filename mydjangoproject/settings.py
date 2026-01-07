@@ -12,9 +12,15 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url 
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+
+ALLOWED_HOSTS = ["*"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -25,7 +31,7 @@ SECRET_KEY = 'django-insecure-#qp(vga576r5x(sc5)40^7a4nqhd6^^=u28*@_kto9ekx1%#6z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -79,11 +85,13 @@ WSGI_APPLICATION = 'mydjangoproject.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+ "default": dj_database_url.config(
+default=os.getenv("DATABASE_URL"),
+conn_max_age=600,
+ssl_require=True  # Render PostgreSQL requires SSL
+   	 )
 }
+
 
 
 AUTH_USER_MODEL = 'authentication_app.UsersOtherInformation'
