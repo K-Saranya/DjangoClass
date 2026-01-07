@@ -1,0 +1,59 @@
+{% extends "index.html" %} {% block productspage %}
+
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <div class="mb-10 flex items-center justify-between">
+    <h2 class="text-3xl font-semibold text-gray-800">Featured Products</h2>
+    <a href="#" class="text-indigo-600 font-medium hover:underline">
+      View All
+    </a>
+  </div>
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+  >
+    {% for product in productDetails %}
+    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition">
+      <div class="relative overflow-hidden rounded-t-xl">
+        <img
+          src="{{product.dress_image}}"
+          class="w-full h-64 object-cover hover:scale-105 transition duration-300"
+          alt="product"
+        />
+        <span
+          class="absolute top-3 left-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full"
+        >
+          20% OFF
+        </span>
+      </div>
+
+      <div class="p-5">
+        <h3 class="text-lg font-medium text-gray-800 truncate">
+            {{product.dress_name}}
+        </h3>
+
+        <!-- Rating -->
+        <div class="flex items-center mt-2">
+          ⭐⭐⭐⭐☆
+          <span class="ml-2 text-sm text-gray-500">(124)</span>
+        </div>
+
+        <!-- Price -->
+        <div class="mt-3 flex items-center space-x-2">
+          <span class="text-xl font-semibold text-gray-800">₹{{product.dress_price}}</span>
+          <span class="text-sm line-through text-gray-400">₹3,199</span>
+        </div>
+
+        <!-- Button -->
+        <button
+          class="mt-4 w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+  {% endblock productspage %}
